@@ -1,9 +1,10 @@
-arm_container:
-  image: node:latest
-
-check_task:
-  node_modules_cache:
-    folder: node_modules
-    fingerprint_script: cat yarn.lock
-    populate_script: yarn install
-  test_script: yarn test
+task:
+  name: hello
+  macos_instance:
+	# can be a remote or a local virtual machine
+	image: ghcr.io/cirruslabs/macos-monterey-base:latest
+  hello_script:
+	- echo "Hello from within a Tart VM!"
+	- echo "Here is my CPU info:"
+	- sysctl -n machdep.cpu.brand_string
+	- sleep 15
